@@ -4,6 +4,16 @@
 let totalVotes = 25;
 let allProducts = [];
 //--------------------CONSTRUCTORS
+let imgContainer = document.getElementById('img-container');
+let imgOne = document.getElementById('img-one');
+let imgTwo = document.getElementById('img-two');
+let imgThree = document.getElementById('img-three');
+
+let resultBtn = document.getElementById('show-result-btn');
+let resultList = document.getElementById('result-list');
+
+console.log(imgOne)
+
 function Products(name, photoExtension = 'jpg') {
   this.name = name;
   this.photo = `img/${name}.${photoExtension}`;
@@ -35,13 +45,6 @@ new Products('water-can');
 new Products('wine-glass');
 
 //--------------------CONSTRUCTOR METHODS
-let imgContainer = document.getElementById('img-container');
-let imgOne = document.getElementById('img-one');
-let imgTwo = document.getElementById('img-two');
-let imgThree = document.getElementById('img-three');
-
-let resultBtn = document.getElementById('show-result-btn');
-let resultList = document.getElementById('result-list');
 //--------------------HELPER FUNCTIONS
 
 function randomIndexGenerator() {
@@ -53,14 +56,17 @@ function renderImg() {
   let imgTwoIndex = randomIndexGenerator();
   let imgThreeIndex = randomIndexGenerator();
 
-  while(imgOneIndex === imgTwoIndex) {
+  while(imgOneIndex === imgTwoIndex || imgTwoIndex === imgThreeIndex || imgOneIndex === imgThreeIndex) {
     imgTwoIndex = randomIndexGenerator();
+    imgThreeIndex = randomIndexGenerator();
 
   }
-
   imgOne.src = allProducts[imgOneIndex].photo;
   imgTwo.src = allProducts[imgTwoIndex].photo;
   imgThree.src = allProducts[imgThreeIndex].photo;
+  imgOne.alt = allProducts[imgOneIndex].photo;
+  imgTwo.alt = allProducts[imgTwoIndex].photo;
+  imgThree.alt = allProducts[imgThreeIndex].photo;
 }
 
 renderImg();
