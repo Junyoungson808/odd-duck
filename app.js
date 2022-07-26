@@ -4,7 +4,7 @@
 let totalVotes = 25;
 let allProducts = [];
 //--------------------CONSTRUCTORS
-function Products(name, photoExtension = "jpg") {
+function Products(name, photoExtension = 'jpg') {
   this.name = name;
   this.photo = `img/${name}.${photoExtension}`;
   this.views = 0;
@@ -13,45 +13,54 @@ function Products(name, photoExtension = "jpg") {
   allProducts.push(this);
 }
 
-new Products("bag");
-new Products("banana");
-new Products("bathroom");
-new Products("boots");
-new Products("bubblegum");
-new Products("chair");
-new Products("cthulhu");
-new Products("dog-duck");
-new Products("dragon");
-new Products("pen");
-new Products("pet-sweep");
-new Products("scissors");
-new Products("shark");
-new Products("sweep", "png");
-new Products("tauntaun");
-new Products("unicorn");
-new Products("water-can");
-new Products("wine-glass");
+//--------------------OBJECTS
+new Products('bag');
+new Products('banana');
+new Products('bathroom');
+new Products('boots');
+new Products('breakfast');
+new Products('bubblegum');
+new Products('chair');
+new Products('cthulhu');
+new Products('dog-duck');
+new Products('dragon');
+new Products('pen');
+new Products('pet-sweep');
+new Products('scissors');
+new Products('shark');
+new Products('sweep', 'png');
+new Products('tauntaun');
+new Products('unicorn');
+new Products('water-can');
+new Products('wine-glass');
 
 //--------------------CONSTRUCTOR METHODS
-let imgContainer = document.getElementById("img-container");
-let imgOne = document.getElementById("img-one");
-let imgTwo = document.getElementById("img-two");
-let imgThree = document.getElementById("img-three");
+let imgContainer = document.getElementById('img-container');
+let imgOne = document.getElementById('img-one');
+let imgTwo = document.getElementById('img-two');
+let imgThree = document.getElementById('img-three');
 
-let resultBtn = document.getElementById("show-result-btn");
-let resultList = document.getElementById("result-list");
-//--------------------FUNCTIONS
+let resultBtn = document.getElementById('show-result-btn');
+let resultList = document.getElementById('result-list');
+//--------------------HELPER FUNCTIONS
 
 function randomIndexGenerator() {
   return Math.floor(Math.random() * allProducts.length);
-  // min - 0
-  // max - array.length - 1
 }
 
 function renderImg() {
-  imgOne.src = allProducts[0].photo;
-  imgTwo.src = allProducts[0].photo;
-  imgThree.src = allProducts[0].photo;
+  let imgOneIndex = randomIndexGenerator();
+  let imgTwoIndex = randomIndexGenerator();
+  let imgThreeIndex = randomIndexGenerator();
+
+  while(imgOneIndex === imgTwoIndex) {
+    imgTwoIndex = randomIndexGenerator();
+
+  }
+
+  imgOne.src = allProducts[imgOneIndex].photo;
+  imgTwo.src = allProducts[imgTwoIndex].photo;
+  imgThree.src = allProducts[imgThreeIndex].photo;
 }
 
 renderImg();
