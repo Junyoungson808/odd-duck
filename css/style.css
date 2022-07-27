@@ -74,7 +74,6 @@
     list-style-type: none;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 8%;
+    padding: 10%;
 
 }
