@@ -3,7 +3,8 @@
 //--------------------GLOBAL VARIABLES/IMPORTS
 let totalVotes = 25;
 let allProducts = [];
-//--------------------CONSTRUCTORS
+
+//--------------------DOM REFERENCES
 let imgContainer = document.getElementById('img-container');
 let imgOne = document.getElementById('img-one');
 let imgTwo = document.getElementById('img-two');
@@ -13,6 +14,7 @@ let resultBtn = document.getElementById('show-result-btn');
 let resultList = document.getElementById('result-list');
 
 console.log(imgOne)
+//--------------------CONSTRUCTOR FUNCTIONS
 
 function Products(name, photoExtension = 'jpg') {
   this.name = name;
@@ -23,7 +25,11 @@ function Products(name, photoExtension = 'jpg') {
   allProducts.push(this);
 }
 
-//--------------------OBJECTS
+//--------------------OBJECT CREATION
+// if() {
+
+// } else {
+new Products('sweep', 'png');
 new Products('bag');
 new Products('banana');
 new Products('bathroom');
@@ -38,51 +44,77 @@ new Products('pen');
 new Products('pet-sweep');
 new Products('scissors');
 new Products('shark');
-new Products('sweep', 'png');
 new Products('tauntaun');
 new Products('unicorn');
 new Products('water-can');
 new Products('wine-glass');
 
-//--------------------CONSTRUCTOR METHODS
+// }
+
 //--------------------HELPER FUNCTIONS
 
-function randomIndexGenerator() {
+function randomNum() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
 function renderImg() {
-  let imgOneIndex = randomIndexGenerator();
-  let imgTwoIndex = randomIndexGenerator();
-  let imgThreeIndex = randomIndexGenerator();
+  let imgOneIndex = randomNum();
+  let imgTwoIndex = randomNum();
+  let imgThreeIndex = randomNum();
 
-  while(imgOneIndex === imgTwoIndex || imgTwoIndex === imgThreeIndex || imgOneIndex === imgThreeIndex) {
-    imgTwoIndex = randomIndexGenerator();
-    imgThreeIndex = randomIndexGenerator();
+  while (imgOneIndex === imgTwoIndex || imgTwoIndex === imgThreeIndex || imgOneIndex === imgThreeIndex) {
+    imgTwoIndex = randomNum();
+    imgThreeIndex = randomNum();
 
   }
+
   imgOne.src = allProducts[imgOneIndex].photo;
+  imgOne.alt = allProducts[imgOneIndex].name;
+  imgOne.name = allProducts[imgOneIndex].name;
+  allProducts[imgOneIndex].views++;
+
   imgTwo.src = allProducts[imgTwoIndex].photo;
+  imgTwo.alt = allProducts[imgTwoIndex].name;
+  imgTwo.name = allProducts[imgTwoIndex].name;
+  allProducts[imgTwoIndex].views++;
+
   imgThree.src = allProducts[imgThreeIndex].photo;
-  imgOne.alt = allProducts[imgOneIndex].photo;
-  imgTwo.alt = allProducts[imgTwoIndex].photo;
-  imgThree.alt = allProducts[imgThreeIndex].photo;
+  imgThree.alt = allProducts[imgThreeIndex].name;
+  imgThree.name = allProducts[imgThreeIndex].name;
+  allProducts[imgThreeIndex].views++;
 }
 
 renderImg();
 
-//--------------------EVENT LISTENERS
-
 //--------------------EVENT HANDLERS
+function handleClick(event) {
+  let imgClicked = event.target.name;
+  console.log(imgClicked);
 
-//--------------------FUNCTION CALLS
+  for (let i = 0; i < allProducts.length; i++) {
+    if (imgClicked === allProducts[i].name) {
+      allProducts[i].votes++;
+    }
+  }
+  totalVotes--;
 
-// What do we need?
+  renderImg();
 
-// Dom References
+  if (totalVotes === 0) {
+    imgContainer.removeEventListener('click', handleClick);
+  }
+}
 
-// Constructor - What is our Constructor? Objects to build
+function handleShowResults() {
+  if(totalVotes === 0){
+    for(let i = 0; i < allProducts.length; i++) {
+      let liElem = document.createElement('li');
+      liElem.textContent = `${allProducts[i].name}; views: ${allProducts[i].views} votes: ${allProducts[i].votes}`;
+      resultList.appendChild(liElem);
+    }
+  }
+}
 
-// Global Variables
-
-// Executable Code
+//--------------------EVENT LISTENERS
+imgContainer.addEventListener('click', handleClick);
+resultBtn.addEventListener('click',handleShowResults);
