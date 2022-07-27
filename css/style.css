@@ -71,14 +71,7 @@
 }
 
 #img-container {
-    list-style-type: none;
     display: flex;
+    padding: 10%;
     justify-content: space-between;
-    align-items: center;
-    padding: 8%;
-
-}
-
-.isenguard {
-    display: inline;
 }

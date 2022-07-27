@@ -115,8 +115,6 @@ function handleShowResults() {
   }
 }
 
-
-
 //--------------------EVENT LISTENERS
 imgContainer.addEventListener('click', handleClick);
 resultBtn.addEventListener('click',handleShowResults);
