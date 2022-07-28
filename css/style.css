@@ -71,9 +71,6 @@
 }
 
 #img-container {
-    list-style-type: none;
     display: flex;
-    justify-content: space-between;
     padding: 10%;
-
-}
+    justify-content: space-between;

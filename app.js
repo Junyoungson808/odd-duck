@@ -24,7 +24,6 @@ let parsedProducts = JSON.parse(retreivedProducts);
 
 console.log('parsed products', parsedProducts);
 
-
 //--------------------CONSTRUCTOR FUNCTIONS
 
 function Products(name, photoExtension = 'jpg') {
@@ -35,6 +34,7 @@ function Products(name, photoExtension = 'jpg') {
 
   allProducts.push(this);
 }
+
 
 // for( let i = 0; i < productsNames.length: i++){
 //   if(productsNames[i] === 'sweep'){
@@ -69,11 +69,13 @@ if(retreivedProducts) {
   new Products('wine-glass');
 }
 
+
 //--------------------HELPER FUNCTIONS
 
 function randomNum() {
   return Math.floor(Math.random() * allProducts.length);
 }
+
 
 let productIndexArr = [];
 
@@ -85,6 +87,7 @@ function renderImg() {
       productIndexArr.push(randomNumber);
     }
   }
+
 
   let imgOneIndex = productIndexArr.shift();
   let imgTwoIndex = productIndexArr.shift();
@@ -128,6 +131,7 @@ function handleClick(event) {
     }
   }
   totalVotes--;
+
 
   renderImg();
 
